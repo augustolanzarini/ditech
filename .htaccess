@@ -1,0 +1,18 @@
+Options Indexes FollowSymLinks
+DirectoryIndex index.html index.htm /server.php
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    #Ativa o suporte � reescrita
+    RewriteCond %{SCRIPT_FILENAME} !-f
+    #N�o aplica a condi��o para arquivos
+    RewriteCond %{SCRIPT_FILENAME} !-d
+    #N�o aplica a condi��o para diret�rios
+    ##################### TROCAR A RAIZ ######################
+    RewriteRule ^(.*)$ server.php [L]
+    #RewriteRule ^(.*)(\?.*)?$ url.php [L]
+    #RewriteRule ^(.*)$ url.php?conteudo=$1 [L]
+    ##########################################################
+    
+    #Regra de reescrita onde qualquer string (.*) ap�s a pasta, onde estiver o .htaccess, ser� interpretado por index.php passado na vari�vel conteudo
+</IfModule>
