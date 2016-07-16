@@ -38,9 +38,9 @@
                                 <tbody>
                                     @foreach($reservas as $key => $reserva)
                                     <tr id="reserva{{$reserva->id}}">
-                                        <td>{{$reserva->data_hora->format('d/m/Y')}}</td>
-                                        <td>{{$reserva->data_hora->format('H:i')}}</td>
-                                        <td>-</td>
+                                        <td>{{$reserva->data}}</td>
+                                        <td>{{$reserva->hora}}</td>
+                                        <td>{{$reserva->name}}</td>
                                         <td class="text-right">
                                             <button class="btn btn-danger btn-delete" data-id="{{$reserva->id}}">Excluir</button>
                                         </td>
@@ -90,9 +90,16 @@
                async: true,
                dataType: 'json',
                success:function(data){
-                    $('#data_reserva').val('');
-                    $('#hora_reserva').val('');
-                    addRowReserva(data);
+                   if(data.toString().indexOf('msg_error->') != '-1'){
+                        $('#btnPadraoConfirmar').css('display','none');
+                        $('#modalPadraoTitulo').text('Erro!');  
+                        $('#modalPadraoMsg').text(data.toString().split('msg_error->')[1]);  
+                        $('#modalPadrao').modal('show');  
+                   } else {
+                        $('#data_reserva').val('');
+                        $('#hora_reserva').val('');
+                        addRowReserva(data);
+                   }
                }
             });
         });
@@ -102,6 +109,7 @@
             $('#btnPadraoConfirmar').attr('onClick','excluirReserva('+id+')');
             $('#modalPadraoTitulo').text('Excluir Reserva');  
             $('#modalPadraoMsg').text('Tem certeza que deseja Excluir ?');  
+            $('#btnPadraoConfirmar').css('display','');
             $('#modalPadrao').modal('show');  
          });
     });
@@ -120,15 +128,11 @@
     function addRowReserva(data){
         var row = '';
         jQuery.each(data, function(i, obj) {
-            _dataHora = obj.data_hora;
-            _dataHora = _dataHora.split(" ");
-            
-            _data = _dataHora[0].split('-');
             
             row += '<tr id="reserva'+obj.id+'">'+
-                      '<td>'+_data[2]+'/'+_data[1]+'/'+_data[0]+'</td>'+
-                      '<td>'+_dataHora[1].substr(0, 5)+'</td>'+
-                      '<td>-</td>'+
+                      '<td>'+obj.data+'</td>'+
+                      '<td>'+obj.hora+'</td>'+
+                      '<td>'+obj.name+'</td>'+
                       '<td class="text-right"><button class="btn btn-danger btn-delete" data-id="'+obj.id+'">Excluir</button></td>'+
                     '</tr>';
         });
@@ -141,10 +145,19 @@
              url  : 'deleteReserva',
              data : {'id':id},
              async: true,
-             dataType: 'json',
+             dataType: 'html',
              success:function(data){
-                 $('#reserva'+id).remove();
-                 $('#modalPadrao').modal('hide');  
+                 if(data.toString().indexOf('msg_error->') != '-1'){
+                        setTimeout(function(){
+                            $('#btnPadraoConfirmar').css('display','none');
+                            $('#modalPadraoTitulo').text('Erro!');  
+                            $('#modalPadraoMsg').text(data.toString().split('msg_error->')[1]);  
+                            $('#modalPadrao').modal('show'); 
+                        }, 500);             
+                } else {
+                    $('#modalPadrao').modal('hide');
+                    $('#reserva'+id).remove();
+                }
              }
           });
      }

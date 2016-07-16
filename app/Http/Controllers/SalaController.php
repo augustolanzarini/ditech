@@ -39,8 +39,18 @@ class SalaController extends Controller
     
     public function deleteSala(Request $request) {
         if($request->ajax()){
-            Sala::destroy($request->id);
-            return Response()->json(['sms' => 'Excluido com sucesso!']);
+            if($this->validarExclusao($request)){
+                Sala::destroy($request->id);
+            } else {
+                return 'msg_error->Essa sala possui uma ou mais reservas!';
+            }
+//            return Response()->json(['sms' => 'Excluido com sucesso!']);
         }
+    }
+    
+    public function validarExclusao($request){
+        $totalReservas = \DB::select("select count(*) total from reservas 
+                                    where id_sala = ".$request->id);
+        return $totalReservas[0]->total == 0;
     }
 }

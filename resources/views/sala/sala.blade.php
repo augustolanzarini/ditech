@@ -112,6 +112,7 @@
                    $('#btnPadraoConfirmar').attr('onClick','excluirSala('+id+')');
                    $('#modalPadraoTitulo').text('Excluir Sala');  
                    $('#modalPadraoMsg').text('Tem certeza que deseja Excluir ?');  
+                   $('#btnPadraoConfirmar').css('display','');
                    $('#modalPadrao').modal('show');  
                 });
                 
@@ -121,10 +122,19 @@
                         url  : 'deleteSala',
                         data : {'id':id},
                         async: true,
-                        dataType: 'json',
+                        dataType: 'html',
                         success:function(data){
-                            $('#sala'+id).remove();
-                            $('#modalPadrao').modal('hide');  
+                            if(data.toString().indexOf('msg_error->') != '-1'){
+                                    setTimeout(function(){
+                                        $('#btnPadraoConfirmar').css('display','none');
+                                        $('#modalPadraoTitulo').text('Erro!');  
+                                        $('#modalPadraoMsg').text(data.toString().split('msg_error->')[1]);  
+                                        $('#modalPadrao').modal('show'); 
+                                    }, 500);             
+                            } else {
+                                $('#sala'+id).remove();
+                                $('#modalPadrao').modal('hide');
+                            }
                         }
                      });
                 }
