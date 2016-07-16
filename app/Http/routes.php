@@ -11,10 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::auth();
 
 Route::get('/', 'HomeController@index');
@@ -43,4 +39,19 @@ Route::post('getUpdate', [
 Route::post('deleteSala', [
     'middleware' => 'auth',
     'uses' => 'SalaController@deleteSala'
+]);
+
+Route::post('getReservas', [
+    'middleware' => 'auth',
+    'uses' => 'ReservaController@getReservas'
+]);
+
+Route::post('newReserva', [
+    'middleware' => 'auth',
+    'uses' => 'ReservaController@newReserva'
+]);
+
+Route::post('deleteReserva', [
+    'middleware' => 'auth',
+    'uses' => 'ReservaController@deleteReserva'
 ]);

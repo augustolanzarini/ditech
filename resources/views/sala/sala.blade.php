@@ -10,11 +10,11 @@
             
                 <div class="panel-body">   
                     @include('sala.newSala')
-                    <table class="table table-hover">
+                    <table id="listaSala" class="table table-hover">
                         <caption><button type="button" class="btn btn-success" id="add">Novo</button></caption>
                         <thead>
-                        <th>Nome</th>
-                        <th></th>
+                            <th>Nome</th>
+                            <th></th>
                         </thead>
                         <tbody>
                             @foreach($salas as $key => $sala)
@@ -31,6 +31,7 @@
                     </table>
                 </div>
             </div>
+            <div id="reservaAux"></div>
             <script type="text/javascript">
                 
                 $('#add').on('click',function(){
@@ -71,7 +72,7 @@
                     });
                 });
                 
-                $('tbody').delegate('.btn-edit','click',function(){
+                $('#listaSala tbody').delegate('.btn-edit','click',function(){
                    var id = $(this).data('id'); 
                    $.ajax({
                        type : 'post' ,
@@ -87,7 +88,26 @@
                     });
                 });
                 
-                $('tbody').delegate('.btn-delete','click',function(){
+                $('#listaSala tbody').delegate('.btn-reserva','click',function(){
+                   var id = $(this).data('id'); 
+                   $.ajax({
+                       type : 'post' ,
+                       url  : 'getReservas',
+                       data : {'id_sala':id},
+                       async: true,
+                       dataType: 'html',
+                       success:function(data){
+//                           $('#id').val(data.id);
+//                           $('#nome').val(data.nome);
+//                           $('#sala').modal('show'); 
+                            
+                            $('#reservaAux').html(data);
+                            $('#reserva').modal('show');
+                       }
+                    });
+                });
+                
+                $('#listaSala tbody').delegate('.btn-delete','click',function(){
                    var id = $(this).data('id'); 
                    $('#btnPadraoConfirmar').attr('onClick','excluirSala('+id+')');
                    $('#modalPadraoTitulo').text('Excluir Sala');  
@@ -122,10 +142,10 @@
                     jQuery.each(data, function(i, obj) {
                         row += '<tr id="sala'+obj.id+'">'+
                                   '<td>'+obj.nome+'</td>'+
-                                  '<td class="text-right"><button class="btn btn-success btn-edit" data-id="'+obj.id+'">Editar</button> <button class="btn btn-danger btn-delete" data-id="'+obj.id+'">Excluir</button></td>'+
+                                  '<td class="text-right"><button class="btn btn-info btn-reserva" data-id="'+obj.id+'">Reservas</button> <button class="btn btn-warning btn-edit" data-id="'+obj.id+'">Editar</button> <button class="btn btn-danger btn-delete" data-id="'+obj.id+'">Excluir</button></td>'+
                                 '</tr>';
                     });
-                    $('tbody').html(row);
+                    $('#listaSala tbody').html(row);
                 }
             </script>
         </div>
