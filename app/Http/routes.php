@@ -19,3 +19,28 @@ Route::auth();
 
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+
+Route::get('sala', [
+    'middleware' => 'auth',
+    'uses' => 'SalaController@index'
+]);
+
+Route::post('newSala', [
+    'middleware' => 'auth',
+    'uses' => 'SalaController@newSala'
+]);
+
+Route::post('newUpdate', [
+    'middleware' => 'auth',
+    'uses' => 'SalaController@newUpdate'
+]);
+
+Route::post('getUpdate', [
+    'middleware' => 'auth',
+    'uses' => 'SalaController@getUpdate'
+]);
+
+Route::post('deleteSala', [
+    'middleware' => 'auth',
+    'uses' => 'SalaController@deleteSala'
+]);
