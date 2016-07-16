@@ -11,7 +11,7 @@
                 <div class="panel-body">   
                     @include('sala.newSala')
                     <table class="table table-hover">
-                        <caption><button type="button" class="btn btn-info" id="add">Novo</button></caption>
+                        <caption><button type="button" class="btn btn-success" id="add">Novo</button></caption>
                         <thead>
                         <th>Nome</th>
                         <th></th>
@@ -21,7 +21,8 @@
                             <tr id="sala{{$sala->id}}">
                                 <td>{{$sala->nome}}</td>
                                 <td class="text-right">
-                                    <button class="btn btn-success btn-edit" data-id="{{$sala->id}}">Editar</button>
+                                    <button class="btn btn-info btn-reserva" data-id="{{$sala->id}}">Reservas</button>
+                                    <button class="btn btn-warning btn-edit" data-id="{{$sala->id}}">Editar</button>
                                     <button class="btn btn-danger btn-delete" data-id="{{$sala->id}}">Excluir</button>
                                 </td>
                             </tr>
@@ -36,14 +37,6 @@
                     $('#frmSala').trigger('reset');
                     $('#id').val('');
                     $('#sala').modal('show');          
-                });
-                
-                $('.btn-edit').on('click',function(){
-                    var id = $(this).data('id');
-                });
-                
-                $('.btn-delete').on('click',function(){
-                    var id = $(this).data('id');
                 });
                 
                 $('#frmSala').on('submit',function(e){
@@ -96,19 +89,25 @@
                 
                 $('tbody').delegate('.btn-delete','click',function(){
                    var id = $(this).data('id'); 
-                   if(confirm('Tem certeza que deseja Excluir ?') == true){
-                        $.ajax({
-                            type : 'post' ,
-                            url  : 'deleteSala',
-                            data : {'id':id},
-                            async: true,
-                            dataType: 'json',
-                            success:function(data){
-                                $('#sala'+id).remove();
-                            }
-                         });
-                     }
+                   $('#btnPadraoConfirmar').attr('onClick','excluirSala('+id+')');
+                   $('#modalPadraoTitulo').text('Excluir Sala');  
+                   $('#modalPadraoMsg').text('Tem certeza que deseja Excluir ?');  
+                   $('#modalPadrao').modal('show');  
                 });
+                
+                function excluirSala(id){
+                    $.ajax({
+                        type : 'post' ,
+                        url  : 'deleteSala',
+                        data : {'id':id},
+                        async: true,
+                        dataType: 'json',
+                        success:function(data){
+                            $('#sala'+id).remove();
+                            $('#modalPadrao').modal('hide');  
+                        }
+                     });
+                }
                 
                 function validaCampos(){
                     var retorno = true;
@@ -124,7 +123,7 @@
                         row += '<tr id="sala'+obj.id+'">'+
                                   '<td>'+obj.nome+'</td>'+
                                   '<td class="text-right"><button class="btn btn-success btn-edit" data-id="'+obj.id+'">Editar</button> <button class="btn btn-danger btn-delete" data-id="'+obj.id+'">Excluir</button></td>'+
-                                  '</tr>';
+                                '</tr>';
                     });
                     $('tbody').html(row);
                 }

@@ -20,7 +20,7 @@
                 <input type="hidden" name="id" id="id">
                 <div class="modal-footer">
                     <input type="submit" class="btn btn-primary" value="Salvar" id="salvar">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
                 </div>
             </form>
         </div>
