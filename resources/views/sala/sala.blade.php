@@ -121,7 +121,7 @@
                 function addRow(data){
                     var row = '';
                     jQuery.each(data, function(i, obj) {
-                        row += '<tr>'+
+                        row += '<tr id="sala'+obj.id+'">'+
                                   '<td>'+obj.nome+'</td>'+
                                   '<td class="text-right"><button class="btn btn-success btn-edit" data-id="'+obj.id+'">Editar</button> <button class="btn btn-danger btn-delete" data-id="'+obj.id+'">Excluir</button></td>'+
                                   '</tr>';
