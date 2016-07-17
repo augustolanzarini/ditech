@@ -88,4 +88,37 @@ class ReservaTest extends TestCase
         
         $this->assertEquals('msg_error->Esse horário já está reservado por outro usuário!', $reservaController->validarDataHora($date, (object)['id_sala' => $sala->id]));
     }
+    
+    public function testValidarExclusao(){
+        $sala = App\Sala::create([
+            'nome'  =>  'Teste Sala Um'
+        ]);
+        
+        $user = App\User::create([
+            'name'      =>  'teste usuario',
+            'email'     =>  'teste@teste.com.br',
+            'password'  =>  bcrypt('123456'),
+        ]);
+        
+        \Auth::loginUsingId($user->id);
+        
+        $reserva = App\Reserva::create([
+            'id_sala'       =>  $sala->id,
+            'id_user'       =>  $user->id,
+            'data_hora'     =>  date('Y-m-d H:i:s')
+        ]);
+        
+        $reservaController = new App\Http\Controllers\ReservaController;
+        $this->assertEquals(true, $reservaController->validarExclusao((object)['id' => $reserva->id]));
+        
+        \Auth::logout();
+        $user = App\User::create([
+            'name'      =>  'teste usuario dois',
+            'email'     =>  'teste2@teste.com.br',
+            'password'  =>  bcrypt('123456'),
+        ]);
+        \Auth::loginUsingId($user->id);
+        
+        $this->assertEquals(false, $reservaController->validarExclusao((object)['id' => $reserva->id]));
+    }
 }
