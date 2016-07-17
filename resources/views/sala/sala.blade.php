@@ -65,9 +65,9 @@
                             if(id != ''){
                                 $('#sala').modal('hide'); 
                             } else {
-                                addRow(data);
                                 $('#nome').focus();
                             }
+                            addRow(data);
                        }
                     });
                 });
