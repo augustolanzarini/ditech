@@ -73,9 +73,9 @@ class ReservaController extends Controller
                 return 'msg_error->Data ou Hora inválida!';
         }
         
-        // valida se a data é maior que a atual
+        // valida se a data é menor que a atual
         if($date < date('Y-m-d H:i:s')){
-            return 'msg_error->Data ou Hora inválida!'.$date.' # '.date('Y-m-d H:i:s');
+            return 'msg_error->Data ou Hora inválida!';
         }
         
         // valida se tem alguma reserva no intervalo escolhido
