@@ -64,6 +64,7 @@
                     @if (!Auth::guest())
                     <li><a href="{{ url('/sala') }}">Salas</a></li>
                     <li><a href="{{ url('/cliente') }}">Clientes</a></li>
+                    <li><a href="{{ url('/local') }}">Locais</a></li>
                     @endif
                 </ul>
 

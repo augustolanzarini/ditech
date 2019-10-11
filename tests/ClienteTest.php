@@ -38,24 +38,4 @@ class ClienteTest extends TestCase
         $this->assertNull(App\Cliente::find($cliente->id));
     }
     
-    public function testDeleteClienteComReserva() {
-        $cliente = App\Cliente::create([
-            'nome'  =>  'Teste Cliente Um'
-        ]);
-        
-        $user = App\User::create([
-            'name'      =>  'teste usuario',
-            'email'     =>  'teste@teste.com.br',
-            'password'  =>  bcrypt('123456'),
-        ]);
-        
-        App\Reserva::create([
-            'id_cliente'       =>  $cliente->id,
-            'id_user'       =>  $user->id,
-            'data_hora'     =>  date('Y-m-d H:i:s')
-        ]);
-        
-        $retorno = new App\Http\Controllers\ClienteController;
-        $this->assertEquals(false, $retorno->validarExclusao((object)['id' => $cliente->id]));
-    }
 }
