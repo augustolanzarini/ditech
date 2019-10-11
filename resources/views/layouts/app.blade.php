@@ -63,6 +63,7 @@
                 <ul class="nav navbar-nav">
                     @if (!Auth::guest())
                     <li><a href="{{ url('/sala') }}">Salas</a></li>
+                    <li><a href="{{ url('/cliente') }}">Clientes</a></li>
                     @endif
                 </ul>
 
