@@ -37,6 +37,7 @@ class SalaController extends Controller
         }
     }
     
+    // validações antes de excluir a sala
     public function deleteSala(Request $request) {
         if($request->ajax()){
             if($this->validarExclusao($request)){
@@ -49,6 +50,7 @@ class SalaController extends Controller
     }
     
     public function validarExclusao($request){
+        // se a sala possui reservas, não é possível excluir
         $totalReservas = \DB::select("select count(*) total from reservas 
                                     where id_sala = ".$request->id);
         return $totalReservas[0]->total == 0;

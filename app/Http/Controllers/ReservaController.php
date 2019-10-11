@@ -4,14 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Reserva;
 use App\Sala;
 
 class ReservaController extends Controller
 {
     public function getReservas(Request $request){
-//        $reservas = Reserva::orderBy('data_hora')->get();
         $sala = Sala::find($request->id_sala);
         
         $reservas = \DB::select("select reservas.id, DATE_FORMAT(reservas.data_hora,'%d/%m/%Y') data, DATE_FORMAT(reservas.data_hora,'%H:%i') hora, users.name
