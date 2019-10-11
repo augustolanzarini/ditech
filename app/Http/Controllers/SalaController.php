@@ -16,7 +16,6 @@ class SalaController extends Controller
     
     public function newSala(Request $request) {
         if($request->ajax()){
-            $sala = Sala::create($request->all());
             return Response()->json(Sala::orderBy('nome')->get());
         }
     }
@@ -45,7 +44,6 @@ class SalaController extends Controller
             } else {
                 return 'msg_error->Essa sala possui uma ou mais reservas!';
             }
-//            return Response()->json(['sms' => 'Excluido com sucesso!']);
         }
     }
     
