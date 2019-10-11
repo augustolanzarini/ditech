@@ -90,7 +90,7 @@
                async: true,
                dataType: 'json',
                success:function(data){
-                   if(data.toString().indexOf('msg_error->') != '-1'){
+                   if(data.toString().indexOf('msg_error->') !== '-1'){
                         $('#btnPadraoConfirmar').css('display','none');
                         $('#modalPadraoTitulo').text('Erro!');  
                         $('#modalPadraoMsg').text(data.toString().split('msg_error->')[1]);  
@@ -116,10 +116,10 @@
     
     function validaCamposReserva(){
         var retorno = true;
-        if(jQuery('#data_reserva').val() == ''){
+        if(jQuery('#data_reserva').val() === ''){
             retorno = false;
         }
-        if(jQuery('#hora_reserva').val() == ''){
+        if(jQuery('#hora_reserva').val() === ''){
             retorno = false;
         }
         return retorno;
@@ -147,7 +147,7 @@
              async: true,
              dataType: 'html',
              success:function(data){
-                 if(data.toString().indexOf('msg_error->') != '-1'){
+                 if(data.toString().indexOf('msg_error->') !== '-1'){
                         setTimeout(function(){
                             $('#btnPadraoConfirmar').css('display','none');
                             $('#modalPadraoTitulo').text('Erro!');  
