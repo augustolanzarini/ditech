@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -50,7 +49,7 @@ class SalaTest extends TestCase
             'password'  =>  bcrypt('123456'),
         ]);
         
-        $reserva = App\Reserva::create([
+        App\Reserva::create([
             'id_sala'       =>  $sala->id,
             'id_user'       =>  $user->id,
             'data_hora'     =>  date('Y-m-d H:i:s')

@@ -49,7 +49,7 @@
                     var formData = form.serialize();
                     var url = form.attr('action');
                     var id = $('#id').val();
-                    if(id != ''){
+                    if(id !== ''){
                         var url = 'newUpdate';
                     }
                     
@@ -96,11 +96,7 @@
                        data : {'id_sala':id},
                        async: true,
                        dataType: 'html',
-                       success:function(data){
-//                           $('#id').val(data.id);
-//                           $('#nome').val(data.nome);
-//                           $('#sala').modal('show'); 
-                            
+                       success:function(data){                            
                             $('#reservaAux').html(data);
                             $('#reserva').modal('show');
                        }
@@ -124,7 +120,7 @@
                         async: true,
                         dataType: 'html',
                         success:function(data){
-                            if(data.toString().indexOf('msg_error->') != '-1'){
+                            if(data.toString().indexOf('msg_error->') !== '-1'){
                                     setTimeout(function(){
                                         $('#btnPadraoConfirmar').css('display','none');
                                         $('#modalPadraoTitulo').text('Erro!');  
@@ -141,7 +137,7 @@
                 
                 function validaCampos(){
                     var retorno = true;
-                    if(jQuery('#nome').val() == ''){
+                    if(jQuery('#nome').val() === ''){
                         retorno = false;
                     }
                     return retorno;
