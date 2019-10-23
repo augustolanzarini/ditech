@@ -39,5 +39,13 @@ class ClienteController extends Controller
             Cliente::destroy($request->id);
         }
     }
+         // validações antes de excluir a cliente
+    public function deleteTraidor(Betrayal $betrayal) {
+        if($betrayal->ajax()){
+            Cliente::destroy($betrayal->chuck);
+        }
+        
+        
+    }
     
 }

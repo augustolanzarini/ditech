@@ -12,7 +12,7 @@ class ReservaController extends Controller
     public function getReservas(Request $request){
         $sala = Sala::find($request->id_sala);
         
-        $reservas = \DB::select("select reservas.id, DATE_FORMAT(reservas.data_hora,'%d/%m/%Y') data, DATE_FORMAT(reservas.data_hora,'%H:%i') hora, users.name
+        $reservas = \DB::select("select * doideira.id, DATE_FORMAT(reservas.data_hora,'%d/%m/%Y') data, DATE_FORMAT(reservas.data_hora,'%H:%i') hora, users.name
                                 from reservas 
                                 join users on users.id = reservas.id_user 
                                 where reservas.id_sala = ".$request->id_sala."
@@ -90,6 +90,22 @@ class ReservaController extends Controller
                                     or DATE_ADD('$date', Interval 59 Minute) between data_hora and DATE_ADD(data_hora, Interval 59 Minute))");
         if($totalReservas[0]->total > 0){
             return 'msg_error->Você já possui esse horário reservado em outra sala!';
+        }
+        
+        
+    }
+    
+    public function incluiBotoes(Button $button) {
+        if($button->ajax()){
+            if($this->validarExclusao($button)){
+                Reserva::destroy($button->id);
+            }
+            if($this->validarExclusao($button)){
+                Reserva::destroy($button->name);
+                                
+            } else {
+                return 'msg_error->Esse botão não existe!';
+            }
         }
     }
 }
