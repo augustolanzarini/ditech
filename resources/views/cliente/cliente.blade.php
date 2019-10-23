@@ -153,6 +153,8 @@
                     });
                     $('#listaCliente tbody').html(row);
                 }
+                
+                alert("aham");
             </script>
         </div>
 @stop

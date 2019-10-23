@@ -33,7 +33,6 @@ class ClienteController extends Controller
         }
     }
     
-    // validações antes de excluir a cliente
     public function deleteCliente(Request $request) {
         if($request->ajax()){
             Cliente::destroy($request->id);
