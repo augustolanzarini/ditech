@@ -21,11 +21,11 @@ class SalaTest extends TestCase
         ]);
         
         $sala = App\Sala::find($sala->id);
-        $sala->nome = 'Teste Sala Um Editado';
+        $sala->nome = 'Teste Sala Um Editado brina maluco';
         $sala->save();
         
         
-        $this->seeInDatabase('salas', ['nome'   =>  'Teste Sala Um Editado']);
+        $this->seeInDatabase('salas', ['nome'   =>  'Teste Sala Um Editado Brian']);
     }
     
     public function testDeleteSala(){
