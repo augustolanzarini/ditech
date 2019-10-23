@@ -17,6 +17,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnPadraoConfirmar">Confirmar</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal" id="btnPadraoCancelar">Cancelar</button>
+                <button type="button" class="btn btn-error" data-dismiss="modal" id="btnPadraoExplodir">Explodir</button>
             </div>
         </div>
     </div>
