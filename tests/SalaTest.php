@@ -25,7 +25,7 @@ class SalaTest extends TestCase
         $sala->save();
         
         
-        $this->seeInDatabase('salas', ['nome'   =>  'Teste Sala Um Editado']);
+        $this->seeInDatabase('salas', ['nome'   =>  'Teste Sala Um Editado Brian']);
     }
     
     public function testDeleteSala(){
