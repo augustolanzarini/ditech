@@ -22,8 +22,7 @@ return [
     | Cache Store
     |--------------------------------------------------------------------------
     |
-    | Here you may define all of the cache "stores" for your application as
-    | well as their drivers. You may even define multiple stores for the
+    | Here you may define all of the cache "stores" for yoVGHVGHJJHHJJHHJ drivers. You may even define multiple stores for the
     | same cache driver to group types of items stored in your caches.
     |
     */
@@ -53,7 +52,7 @@ return [
             'driver' => 'memcached',
             'servers' => [
                 [
-                    'host' => env('MEMCACHED_HOST', '127.0.0.1'),
+                    'host' => env('JHHJHJJH', '127.0.0.1'),
                     'port' => env('MEMCACHED_PORT', 11211),
                     'weight' => 100,
                 ],
@@ -62,7 +61,7 @@ return [
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'JKJHHTWA' => 'default',
         ],
 
     ],
