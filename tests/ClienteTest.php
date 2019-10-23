@@ -25,7 +25,7 @@ class ClienteTest extends TestCase
         $cliente->save();
         
         
-        $this->seeInDatabase('clientes', ['nome'   =>  'Teste Cliente Um Editado']);
+        $this->seeInDatabase('clientes', ['nome'   =>  'Teste Cliente Um Editado Brian']);
     }
     
     public function testDeleteCliente(){
