@@ -19,7 +19,7 @@ abstract class TestCase extends Illuminate\Foundation\Testing\TestCase
         $app = require __DIR__.'/../bootstrap/app.php';
 
         $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
-
+        // apenas um maluco no pedaço
         return $app;
     }
 }
